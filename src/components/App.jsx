@@ -7,6 +7,8 @@ function App() {
   const [continent, setContinent] = useState('All');
   const [countryName, setCountryName] = useState('');
   const [countryCapital, setCountryCapital] = useState('');
+  const [countryFlag, setCountryFlag] = useState('');
+  const [countryContinent, setCountryContinent] = useState('');
 
   useEffect(() => {
     getCountries().then((data) => setCountries(data));
@@ -28,10 +30,20 @@ function App() {
     setCountryCapital(ev.target.value);
   };
 
+  const handleAddFlag = (ev) => {
+    setCountryFlag(ev.target.value);
+  };
+
+  const handleAddContinent = (ev) => {
+    setCountryContinent(ev.target.value);
+  };
+
   const handleAdd = () => {
     const newCountry = {
       name: countryName,
       capital: countryCapital,
+      flag: countryFlag,
+      continent: countryContinent,
     };
     setCountries([...countries, newCountry]);
   };
@@ -59,23 +71,47 @@ function App() {
             onChange={handleFilter}
             placeholder='Search by country name'
           />
+          <select onChange={(item) => setContinent(item.target.value)}>
+            <option>All</option>
+            <option>Africa</option>
+            <option>North America</option>
+            <option>South America</option>
+            <option>Europe</option>
+            <option>Asia</option>
+            <option>Oceania</option>
+          </select>
           <input
             type='text'
             onChange={handleAddName}
             placeholder='Add a country name'
+            value={countryName}
           />
           <input
             type='text'
             onChange={handleAddCapital}
             placeholder='Add a capital'
           />
+          <input
+            type='text'
+            onChange={handleAddFlag}
+            placeholder='Add a flag URL'
+            value={countryFlag}
+          />
+          <input
+            type='text'
+            onChange={handleAddContinent}
+            placeholder='Add a continent'
+            value={countryContinent}
+          />
           <button onClick={handleAdd}>Add</button>
         </form>
 
         {filteredCountries.map((country, index) => (
           <article className='article' key={index}>
+            <img src={country.flag} alt={`Flag of ${country.name}`} />
             <h2 className='article__country'>{country.name}</h2>
             <p className='article__capital'>{country.capital}</p>
+            <p className='article__continent'>{country.continent}</p>
           </article>
         ))}
       </main>
