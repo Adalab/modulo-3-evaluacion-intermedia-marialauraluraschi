@@ -1,0 +1,19 @@
+@mixin textStyle($fontFamily, $fontWeight, $fontSize, $color) {
+  font-family: $fontFamily;
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  color: $color;
+}
+
+@mixin iconStyle($fontWeight, $fontSize, $color) {
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  color: $color;
+}
+
+@mixin centerTotal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
