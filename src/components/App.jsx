@@ -43,7 +43,7 @@ function App() {
       name: countryName,
       capital: countryCapital,
       flag: countryFlag,
-      continent: countryContinent,
+      continents: [countryContinent],
     };
     setCountries([...countries, newCountry]);
   };
@@ -51,7 +51,7 @@ function App() {
   const filteredCountries = countries.filter((country) => {
     return (
       country.name.toLowerCase().includes(search.toLowerCase()) &&
-      (continent === 'All' || country.continent === continent)
+      (continent === 'All' || country.continents.includes(continent))
     );
   });
 
@@ -84,7 +84,6 @@ function App() {
             type='text'
             onChange={handleAddName}
             placeholder='Add a country name'
-            value={countryName}
           />
           <input
             type='text'
@@ -95,25 +94,26 @@ function App() {
             type='text'
             onChange={handleAddFlag}
             placeholder='Add a flag URL'
-            value={countryFlag}
           />
           <input
             type='text'
             onChange={handleAddContinent}
             placeholder='Add a continent'
-            value={countryContinent}
           />
           <button onClick={handleAdd}>Add</button>
         </form>
 
         {filteredCountries.map((country, index) => (
-          <article className='article' key={index}>
-            <img src={country.flag} alt={`Flag of ${country.name}`} />
-            <h2 className='article__country'>{country.name}</h2>
-            <p className='article__capital'>{country.capital}</p>
-            <p className='article__continent'>{country.continent}</p>
-          </article>
-        ))}
+  <article className='article' key={index}>
+    <img src={country.flag} alt={`Flag of ${country.name}`} />
+    <h2 className='article__country'>{country.name}</h2>
+    <p className='article__capital'>{country.capital}</p>
+    {Array.isArray(country.continents) && country.continents.map((continent, i) => (
+      <p key={i} className='article__continent'>{continent}</p>
+    ))}
+  </article>
+))}
+
       </main>
       <footer className='footer'>Copy</footer>
     </>
