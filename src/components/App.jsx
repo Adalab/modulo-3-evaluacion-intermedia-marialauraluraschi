@@ -46,6 +46,10 @@ function App() {
       continents: [countryContinent],
     };
     setCountries([...countries, newCountry]);
+    setCountryName('');
+    setCountryCapital('');
+    setCountryFlag('');
+    setCountryContinent('');
   };
 
   const filteredCountries = countries.filter((country) => {
