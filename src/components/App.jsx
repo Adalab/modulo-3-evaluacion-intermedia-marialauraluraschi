@@ -54,14 +54,13 @@ function App() {
       (continent === 'All' || country.continents.includes(continent))
     );
   });
-
   return (
     <>
       <header className='header'>
         <h1 className='header__title'>Country Info App</h1>
         <p>
-          Explore information about countries and capitals. Add new
-          countries and filter through the list
+          Explore information about countries and capitals. Add new countries
+          and filter through the list
         </p>
       </header>
       <main className='main'>
@@ -80,6 +79,9 @@ function App() {
             <option>Asia</option>
             <option>Oceania</option>
           </select>
+        </form>
+
+        <form onSubmit={handleForm}>
           <input
             type='text'
             onChange={handleAddName}
@@ -104,16 +106,18 @@ function App() {
         </form>
 
         {filteredCountries.map((country, index) => (
-  <article className='article' key={index}>
-    <img src={country.flag} alt={`Flag of ${country.name}`} />
-    <h2 className='article__country'>{country.name}</h2>
-    <p className='article__capital'>{country.capital}</p>
-    {Array.isArray(country.continents) && country.continents.map((continent, i) => (
-      <p key={i} className='article__continent'>{continent}</p>
-    ))}
-  </article>
-))}
-
+          <article className='article' key={index}>
+            <img src={country.flag} alt={`Flag of ${country.name}`} />
+            <h2 className='article__country'>{country.name}</h2>
+            <p className='article__capital'>{country.capital}</p>
+            {Array.isArray(country.continents) &&
+              country.continents.map((continent, i) => (
+                <p key={i} className='article__continent'>
+                  {continent}
+                </p>
+              ))}
+          </article>
+        ))}
       </main>
       <footer className='footer'>Copy</footer>
     </>
