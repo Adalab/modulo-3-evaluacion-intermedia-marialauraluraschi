@@ -35,22 +35,27 @@ function App() {
   };
 
   const handleAddContinent = (ev) => {
-    setCountryContinent(ev.target.value);
+    setCountryContinent([ev.target.value]);
   };
 
   const handleAdd = () => {
-    const newCountry = {
-      name: countryName,
-      capital: countryCapital,
-      flag: countryFlag,
-      continents: [countryContinent],
-    };
-    setCountries([...countries, newCountry]);
-    setCountryName('');
-    setCountryCapital('');
-    setCountryFlag('');
-    setCountryContinent('');
+    if (countryName && countryCapital && countryFlag && countryContinent) {
+      const newCountry = {
+        name: countryName,
+        capital: countryCapital,
+        flag: countryFlag,
+        continents: [countryContinent],
+      };
+      setCountries([...countries, newCountry]);
+      setCountryName('');
+      setCountryCapital('');
+      setCountryFlag('');
+      setCountryContinent('');
+    } else {
+      alert('Please fill in all fields before adding a new country.');
+    }
   };
+  
 
   const filteredCountries = countries.filter((country) => {
     return (
